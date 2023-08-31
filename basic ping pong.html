@@ -1,0 +1,156 @@
+<canvas id="canvas" width="480" height="400"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  setInterval(loop,1000/60);
+  document.addEventListener("keydown",OnKey);
+  document.addEventListener("keyup",UpKey);
+
+  var posY = 160;
+  var pos2Y = 160;
+  var ballX = 240;
+  var ballY = 200;
+  var fx = 3;
+  var fy = 2;
+  var scor1 = 0;
+  var scor2 = 0;
+  var UOnKeyDown;
+  var UOnKeyUp;
+  var DOnKeyDown;
+  var DOnKeyUp;
+  var UOnKeyDown1;
+  var UOnKeyUp1;
+  var DOnKeyDown1;
+  var DOnKeyUp1;
+  function loop(){
+    update();
+    draw();
+  }
+  function update(){
+    ballX += fx;
+    ballY += fy;
+
+    if(UOnKeyDown){
+      posY -=3;
+    }
+     if(DOnKeyDown){
+      posY +=3;
+    }
+    if(UOnKeyDown1){
+      pos2Y -=3;
+    }
+     if(DOnKeyDown1){
+      pos2Y +=3;
+    }
+    if(posY <= 0){
+      posY = 0;
+    }
+     if(posY >= 340){
+      posY = 340;
+    }
+    if(pos2Y <= 0){
+      pos2Y = 0;
+    }
+     if(pos2Y >= 340){
+      pos2Y = 340;
+    }
+    if(ballX >= 455 ){
+      if (ballY >= pos2Y && ballY<=pos2Y+50) {
+      fx = -fx;
+      }
+    }
+    if(ballX <= 20 ){
+      if (ballY >= posY && ballY<=posY+50) {
+      fx = -fx;
+      }
+    }
+    if (ballY >= 400) {
+      fy = -fy;
+    }
+    if (ballY <= 0) {
+      fy = -fy;
+    }
+    if (ballX >= 480) {
+      scor1+= 1;
+      ballX = 240;
+      ballY = 200;
+    }
+     if (ballX <= 0) {
+      scor2+= 1;
+      ballX = 240;
+      ballY = 200;
+    }
+    if (scor1 == 5) {
+    alert("Player1 WIN");
+    scor1 = 0;
+    scor2 = 0;
+    }
+    if (scor2 == 5) {
+    alert("Player2 WIN");
+    scor2 = 0;
+    scor1 = 0;
+    }
+  }
+  function draw(){
+   ctx.fillStyle = "black";
+   ctx.fillRect(0,0,canvas.width,canvas.height); 
+
+   ctx.fillStyle = "white";
+   ctx.fillRect(10,posY,10,50);
+  
+   ctx.fillStyle = "white";
+   ctx.fillRect(460,pos2Y,10,50);
+
+   ctx.fillStyle = "white";
+   ctx.beginPath();
+   ctx.arc(ballX, ballY, 10,2 * Math.PI,false);
+   ctx.fill();
+   ctx.closePath();
+    
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.fillText(scor1,10,30);
+
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.fillText(scor2,460,30);
+  }
+  function OnKey(e){
+    if(e.key == "w"){
+      UOnKeyDown = true;
+      UOnKeyUp = false;
+    }
+    if(e.key == "s"){
+      DOnKeyDown = true;
+      DOnKeyUp = false;
+    }
+    if(e.keyCode == 38){
+      UOnKeyDown1 = true;
+      UOnKeyUp1 = false;
+    }
+    if(e.keyCode == 40){
+      DOnKeyDown1 = true;
+      DOnKeyUp1 = false;
+    }
+  }
+    function UpKey(e){
+    if(e.key == "w"){
+     UOnKeyDown = false;
+     UOnKeyUp = true;
+    }
+    if(e.key == "s"){
+      DOnKeyDown = false;
+      DOnKeyUp = true;
+    }
+     if(e.keyCode == 38){
+      UOnKeyDown1 = false;
+      UOnKeyUp1 = true;
+    }
+    if(e.keyCode == 40){
+      DOnKeyDown1 = false;
+      DOnKeyUp1 = true;
+    }
+  }
+</script>
+
+
