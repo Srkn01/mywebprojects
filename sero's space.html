@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	#can{
+		position: absolute;
+		width: 500px;
+		height: 500px;
+		left: 400px;
+		background-color: black;
+		display: block;
+	}
+	#bt{
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	left: 200px;	
+	top: 160px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	
+	}
+	#bt:hover{
+	border: 3px solid red;
+	}
+	#bt2{
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	left: 200px;	
+	top: 240px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	}
+	#bt2:hover{
+	border: 3px solid red;
+	}
+	#bt3{
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	left: 200px;	
+	top: 320px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	}
+	#bt3:hover{
+	border: 3px solid red;
+	}
+	#easy{
+	position: absolute;
+	width: 70px;
+	height: 30px;
+	left: 320px;	
+	top: 240px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	display: none;
+	}
+	#easy:hover{
+	border: 3px solid red;
+	}
+	#hard{
+	position: absolute;
+	width: 70px;
+	height: 30px;
+	left: 420px;	
+	top: 240px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	display: none;
+	}
+	#hard:hover{
+	border: 3px solid red;
+	}
+	#insane{
+	position: absolute;
+	width: 100px;
+	height: 30px;
+	left: 350px;	
+	top: 290px;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	display: none;
+	}
+	#insane:hover{
+	border: 3px solid red;
+	}
+	#par{
+		position: absolute;
+		color: red;
+		font-size: 40px;
+		font-weight: bold;
+		left: 105px;
+		top: 20px;
+	}
+	#in{
+	position: absolute;
+		color: red;
+		font-size: 15px;
+		font-weight: bold;
+		left: 130px;
+		top: 390px;	
+	display: none;
+	}
+	#canvas{
+		position: absolute;
+		left: 400px;
+		background-color: black;
+	}
+</style>
+</head>
+<body>
+	<div id="can"><p id="par">SERO'S SPACE</p><button id="bt">START</button><button id="bt2">SETTING</button><button id="easy">EASY</button><button id="hard">HARD</button><button id="insane">INSANE</button><button id="bt3">INFO</button><p id="in">HAZIRLAYAN : SERKAN YILMAZ</p></div>
+<canvas id="canvas" width="500" height="500" style="display: none;"></canvas>
+
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	setInterval(loop,100/20);
+	var posx = 230;
+	var posy = 410;
+	var tx = Math.round(Math.random() * 500);
+	var ty = 10;
+	var tfx;
+	var tfy = ty;
+	var velt = 0;
+	var velb = 1;
+	var velx = 0;
+	var vely = 0;
+	var fire = false;
+	var fx;
+	var fy;
+	var click = false;
+	var cl = false;
+	var bfire =false;
+	var healty = 3;
+	var score = 0;
+	var tvely = 0;
+	document.addEventListener("keydown",keyd);
+	document.addEventListener("keyup",keyu);
+	document.getElementById('bt').onclick = 
+	() => {
+		velt = velb;
+		tfy = ty;
+		if (bfire) {
+			tvely = -2;
+		}
+		document.getElementById("can").style.display = "none";
+		document.getElementById("canvas").style.display = "block";
+	}
+	document.getElementById('bt2').onclick = 
+	() => {
+		click = !click;
+		if(click){
+		document.getElementById("easy").style.display = "block";
+		document.getElementById("hard").style.display = "block";
+		document.getElementById("insane").style.display = "block";
+
+	}
+		if(!click){
+		document.getElementById("easy").style.display = "none";
+		document.getElementById("hard").style.display = "none";
+		document.getElementById("insane").style.display = "none";
+
+	}
+	}
+	document.getElementById('easy').onclick = 
+	() => {
+		velb = 1;
+	}
+	document.getElementById('hard').onclick = 
+	() => {
+		velb = 1.7;
+	}
+	document.getElementById('insane').onclick = 
+	() => {
+		bfire = true;
+		velb = 1.7;
+	}
+	document.getElementById('bt3').onclick = 
+	() => {
+		cl = !cl;
+		if(cl){
+			document.getElementById("in").style.display = "block";
+		}
+		if(!cl){
+			document.getElementById("in").style.display = "none";
+		}
+	}
+	    function loop(){
+    	update();
+    	draw();
+    }
+    function update(){
+    	posx += velx;
+    	posy += vely;
+    	ty +=velt;
+    	if (fire) {
+    		fy-= 2;
+    	}
+    	if (bfire) {
+    		tfx = tx-4;
+    		tfy -=tvely;
+    		
+    		   }
+    		
+    	if(fy > ty-22 && fy < ty+9){
+    if(fx > tx-22 && fx < tx+11){
+
+         tx = Math.round(Math.random() * 500);
+    	 ty = 10;
+    	 score++;
+    	 if(bfire){
+		 tfx = tx-4;
+    	 tfy = ty;
+    	 }
+  } 
+  } 
+  if(posy > ty-22 && posy < ty+9){
+    if(posx > tx-30 && posx < tx+11){
+       ty = 10
+	healty-=1;
+	if(bfire){
+		 tfx = tx-4;
+    	 tfy = ty;
+    	 }
+  }  
+    	}
+    	  if(posy > tfy && posy < tfy){
+    if(posx > tfx && posx < tfx){
+       ty = 10
+	healty-=1;
+	if(bfire){
+		 tfx = tx-4;
+    	 tfy = ty;
+    	 }
+  }      	}
+    
+    	if(healty <= 0){
+    		velt = 0;
+    		posx = 230;
+    		posy = 410;
+		document.getElementById("can").style.display = "block";
+		document.getElementById("canvas").style.display = "none";
+		healty = 3
+		score = 0;
+    	}
+    	if(ty >= 500){
+    		tx = Math.round(Math.random() * 500);
+    		ty = 10;
+    		if(bfire){
+		 tfx = tx-4;
+    	 tfy = ty;
+    	 }
+   	}
+   	if(posx <= 0){
+      posx=0;
+   	}
+   	if(posy <= 0){
+      posy=0;
+   	}
+   	if(posx >= 470){
+      posx=470;
+   	}
+   	if(posy >= 470){
+      posy=470;
+   	}
+   	if(ty >= 487){
+    ty = 10
+	healty-=1;
+   	}
+    }
+    function draw(){
+    	ctx.clearRect(0,0,canvas.width,canvas.height);
+    	ctx.fillStyle = "white";
+    	ctx.fillRect(posx,posy,30,30);
+
+    	ctx.fillStyle = "white";
+    	ctx.font = "20px Ariel";
+        ctx.fillText(healty,10,20);
+  
+        ctx.fillStyle = "white";
+    	ctx.font = "20px Ariel";
+        ctx.fillText(score,480,20);
+
+    	if(fire == true){
+    	ctx.fillStyle = "orange";
+    	ctx.fillRect(fx,fy,15,30); 
+        }
+        if(bfire == true){
+    	ctx.fillStyle = "red";
+    	ctx.fillRect(tfx,tfy,7,15); 
+        }
+    	ctx.beginPath();
+    	ctx.fillStyle = "white";
+    	ctx.arc(tx,ty,13,0,Math.PI * 2);
+    	ctx.fill();
+    	ctx.closePath();
+    }
+    function keyd(e){
+    	if (e.keyCode == "37") {
+    		velx = -1.5;
+    	}
+    	if (e.keyCode == "39") {
+    		velx = 1.5;
+    	}
+    	if (e.keyCode == "38") {
+    		vely = -1.5;
+    	}
+    	if (e.keyCode == "40") {
+    		vely = 1.5;
+    	}
+    	if (e.keyCode == "32") {
+    	fx =posx+7;
+    	fy = posy;
+    	fire = true;
+    	}
+    }
+     function keyu(e){
+    	if (e.keyCode == "37") {
+    		velx = 0;
+    	}
+    	if (e.keyCode == "39") {
+    		velx = 0;
+    	}
+    	if (e.keyCode == "38") {
+    		vely = 0;
+    	}
+    	if (e.keyCode == "40") {
+    		vely = 0;
+    	}
+    }
+</script>
+</body>
+</html>
