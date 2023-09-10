@@ -1,0 +1,281 @@
+<html>
+<head>
+    <title>Calculater</title>
+    <style>
+        #canvas{
+            display: block;
+            position: absolute;
+            width: 300px;
+            height: 450px;
+            background-color: rgba(74, 74, 74, 0.71);
+        }
+        #panel{
+            display: block;
+            position: absolute;
+            width: 200px;
+            height: 70px;
+            left: 50px;
+            top: 20px;
+            background-color: #9f9f9f;
+        }
+        #n1{
+            position: absolute;
+            top: 100px;
+            
+        }
+        #n2{
+            position: absolute;
+            top: 140px;
+        }
+        #n1b{
+        position: absolute;
+            top: 100px;
+            left: 270px;
+        }
+        #n2b{
+        position: absolute;
+            top: 140px;
+            left: 270px;
+        }
+        #n1r{
+            position: absolute;
+            left: 60px;
+            top: 35px;
+            text-align: center;
+        font-weight: bold;
+            font-size: 30px;
+        }
+        #n2r{
+            position: absolute;
+            left: 130px;
+            top: 35px;
+            text-align: center;
+        font-weight: bold;
+            font-size: 30px;
+        }
+        #e{
+            position: absolute;
+            left: 102px;
+            top: 35px;
+            text-align: center;
+        font-weight: bold;
+            font-size: 30px;
+        }
+        #eq{
+            position: absolute;   
+            left: 180px;
+            top: 35px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        #a{
+            position: absolute;
+            left: 200px;
+            top: 35px;
+            text-align: center;
+        font-weight: bold;
+            font-size: 30px;
+        }
+        #plus{
+            position: absolute;
+            font-size: 30px;
+        font-weight: bold;
+    width: 60px;
+    height: 60px;
+            left: 70px;
+        top: 200px;
+        }
+        #plus:hover{
+            border: 4px solid black;
+        }
+        #plus:active{
+            background-color: #383838;
+        }
+        #subs{
+            position: absolute;
+                    font-weight: bold;
+            font-size: 30px;
+
+    width: 60px;
+    height: 60px;
+            left: 150px;
+        top: 200px;
+        }
+         #subs:hover{
+            border: 4px solid black;
+        }
+        #subs:active{
+            background-color: #383838;
+        }
+        #divide{
+            position: absolute;
+                    font-weight: bold;
+            font-size: 30px;
+
+    width: 60px;
+    height: 60px;
+            left: 70px;
+        top: 270px;
+        }
+         #divide:hover{
+            border: 4px solid black;
+        }
+        #divide:active{
+            background-color: #383838;
+        }
+        #multiple{
+            position: absolute;
+            font-weight: bold;
+            font-size: 30px;
+        width: 60px;
+        height: 60px;
+            left: 150px;
+        top: 270px;
+        }
+         #multiple:hover{
+            border: 4px solid black;
+        }
+        #multiple:active{
+            background-color: #383838;
+        }
+        #cal{
+            position: absolute;
+        top: 350px;
+            left: 70px;
+        width: 142px;
+        height: 50px;
+    font-weight: bold;
+            font-size: 18px;
+        }
+        #serkan{
+            position: absolute;
+            left: 35px;
+            top: 480px;
+            font-weight: bold;
+            font-size: 20px;
+            background-color: #6bff93;
+        }
+    </style>
+    </head>
+<body>
+  <div id="canvas"></div>
+  <div id="panel"></div>
+    <div id="n1">
+    Number-1 :  <input type="number" id="box1">
+    </div>
+    
+    <div id="n2">
+    Number-2 :  <input type="number" id="box2">
+    </div>
+    <button id="n1b">P</button>
+    <button id="n2b">P</button>
+    <label id="n1r" type=""></label>
+    <label id="e" ></label>
+    <label id="n2r" ></label>
+    <label id="eq">=</label>
+    <label id="a"></label>
+    <label id="serkan">Hazırlayan : Serkan YILMAZ</label>
+    <button id="plus">+</button>
+    <button id="subs">-</button>
+    <button id="divide">/</button>
+    <button id="multiple">*</button>
+    <button id="cal">CALCULATE</button>
+    <script>
+    var n1,n2,res;
+    var pl,su,di,mu = false;
+    
+    setInterval(loop,10);
+    document.getElementById("n1b").onclick = c1;
+    document.getElementById("n2b").onclick = c2;
+
+    document.getElementById("plus").onclick = p;
+    document.getElementById("subs").onclick = s;
+    document.getElementById("divide").onclick = d;
+    document.getElementById("multiple").onclick = m;
+    document.getElementById("cal").onclick = equal;
+
+
+    function loop(){
+        n1 = document.getElementById("box1").value;
+        n2 = document.getElementById("box2").value;
+       if(pl){
+          res = parseInt(n1)+parseInt(n2);
+          }
+        if(su){
+          res = parseInt(n1)-parseInt(n2);
+          }
+        if(di){
+          res = parseInt(n1)/parseInt(n2);
+          }
+        if(mu){
+          res = parseInt(n1)*parseInt(n2);
+          }
+       
+
+    }
+        function c1(){
+        document.getElementById("n1r").innerHTML = n1;
+        }
+        function c2(){
+        document.getElementById("n2r").innerHTML = n2;
+
+        }
+        function p(){
+            if(n1.length != 0 ){
+                
+        document.getElementById("e").innerHTML = "+";
+                pl = true;
+                su = false;
+                di = false;
+                mu = false;
+            }
+            
+
+        }
+        function s(){
+             if(n1.length != 0){
+                
+        document.getElementById("e").innerHTML = "-";
+                 pl = false;
+                su = true;
+                di = false;
+                mu = false;
+             }
+        }
+        function d(){
+             if(n1.length != 0 ){
+                
+        document.getElementById("e").innerHTML = "/";
+   pl = false;
+                su = false;
+                di = true;
+                mu = false;
+             }
+        }
+        function m(){
+             if(n1.length != 0 ){
+                
+        document.getElementById("e").innerHTML = "*";
+   pl = false;
+                su = false;
+                di = false;
+                mu = true;
+             }
+        }
+        function equal(){
+            if(n1.length != 0 && n2.length != 0){
+               
+            document.getElementById("a").innerHTML= res;
+               }
+        }
+        
+        
+    </script>
+    </body>
+
+
+
+
+
+</html>
